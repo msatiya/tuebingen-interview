@@ -1,0 +1,120 @@
+\documentclass[10pt]{beamer}
+
+\usetheme{metropolis}
+\usefonttheme[onlymath]{serif}
+\metroset{sectionpage=none, progressbar=frametitle, numbering=fraction}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{array}
+
+% Tübingen-ish red accent
+\definecolor{uniRed}{RGB}{166, 28, 46}
+\setbeamercolor{frametitle}{bg=uniRed}
+\setbeamercolor{progress bar}{fg=uniRed}
+\setbeamercolor{normal text}{fg=black!85}
+\setbeamerfont{title}{size=\large, series=\bfseries}
+
+\title{Dialect-Aware Automatic Speech Recognition}
+\subtitle{Research background and PhD vision}
+\author{Satiyabooshan Murugaboopathy}
+\date{Doctoral Researcher Position 1 · University of Tübingen}
+
+\setbeamertemplate{frame footer}{\insertshortauthor\quad$\cdot$\quad\insertshorttitle}
+
+\begin{document}
+
+\begin{frame}[plain,noframenumbering]
+  \maketitle
+\end{frame}
+
+%% ================= Slide 1: Background =================
+\begin{frame}{Background}
+  \begin{columns}[T]
+    \begin{column}{0.58\textwidth}
+      \small
+      \textbf{ML researcher}: low-resource, uncertainty-aware modeling and
+      \emph{systematic benchmarking} meeting real deployment.
+      \vspace{0.4em}
+      \begin{itemize}
+        \item \textbf{Voice-agent startup (co-founder)} — production Whisper ASR
+              (German), wav2vec 2.0 / HuBERT, CTC, on-device inference.
+        \item \textbf{Linköping IAS} — uncertainty-aware pipelines for sparse,
+              heterogeneous data.
+        \item \textbf{Fraunhofer IMW/ISI} — NLP over noisy corpora; weak supervision.
+        \item \textbf{Porsche \& Volkswagen} — short sequence / multimodal learning.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.40\textwidth}
+      \small
+      \textbf{Education}\\
+      M.Sc.\ Computer Science, Uni Leipzig — thesis: systematic benchmarking of
+      text classification.\\[0.2em]
+      B.Sc.\ Computer Science.
+      \vspace{0.5em}
+      \begin{alertblock}{Why this project}
+        Native \textbf{German} speaker; keen on \emph{speech as a clinical biomarker}.
+      \end{alertblock}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%% ============ Slide 2: Research — interpretability & calibration ============
+\begin{frame}{Research I — Understanding \emph{why} models fail}
+  \textbf{Main tool: intervene in representation / calibration space, without new
+  labels or retraining.}
+  \vspace{0.5em}
+  \begin{block}{SHEAR — spurious shortcuts vs.\ sparse autoencoders}
+    Decomposes frozen text embeddings into sparse features and \emph{ablates}
+    shortcut features with no group labels — works even when target and spurious
+    attribute are \textbf{perfectly correlated}.
+  \end{block}
+  \begin{block}{LUCID — statistically grounded self-correction}
+    Diagnoses an LLM rater's \emph{systematic bias} (doubly-robust DSL/PPI),
+    feeds it back as text, and lets the rater re-grade itself — no retraining.
+  \end{block}
+  \begin{center}
+    \small \textbf{Thread:} make cheap models \emph{trustworthy} under scarcity.
+  \end{center}
+\end{frame}
+
+%% ============ Slide 3: Research — multimodal & causal verification ============
+\begin{frame}{Research II — Verifying representations under scarcity}
+  \begin{block}{Platonic Representations (poverty mapping)}
+    Fuses \textbf{satellite vision + LLM/agent text} to predict wealth across
+    $\sim$60k African DHS clusters; releases an open multimodal dataset.
+    Fusion beats vision-only ($R^2$ 0.77 vs.\ 0.63 OOS).
+  \end{block}
+  \begin{block}{Agent Verifiers (counterfactual analysis)}
+    Benchmarks whether agentic treatment-effect representations are
+    \emph{causally admissible} — guarding against retrieval and encoder leakage
+    before they enter causal analysis.
+  \end{block}
+  \begin{center}
+    \small \textbf{Thread:} benchmarking is itself a research contribution.
+  \end{center}
+\end{frame}
+
+%% ============ Slide 4: PhD vision ============
+\begin{frame}{PhD Vision — Interpretability meets data-scarce ASR}
+  \textbf{Problem:} SOTA speech recognition breaks on 1950--75 Swabian dialect —
+  regional variation, spontaneous speech, almost no annotation.
+  \vspace{0.5em}
+  \begin{itemize}
+    \item Adapt \textbf{self-supervised speech models} (wav2vec~2.0 / HuBERT /
+          WavLM) to dialect — but \emph{diagnose} the shift, don't just fine-tune.
+    \item \textbf{SHEAR-style} sparse decomposition of speech features to find
+          dialect / shortcut directions.
+    \item \textbf{LUCID-style} calibrated uncertainty to route unsure segments to
+          expert (human-in-the-loop) curation.
+  \end{itemize}
+  \vspace{0.4em}
+  \begin{center}
+    \small Deliverables: uncertainty-aware dialect ASR + IPA transcription,
+    an open benchmark, and clinical validation on the TREND cohort.
+  \end{center}
+\end{frame}
+
+\end{document}
